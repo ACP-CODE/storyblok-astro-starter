@@ -1,0 +1,40 @@
+name: Upgrade Astro
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 0 * * *'  # 每天的 UTC 时间 00:00 运行
+  workflow_dispatch: # 手动触发
+
+jobs:
+  upgrade-astro:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Upgrade Astro
+        run: npx @astrojs/upgrade
+
+      - name: Commit changes
+        run: |
+          git config --local user.name "actions"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json
+          git commit -m "Upgrade Astro dependencies using @astrojs/upgrade" || echo "No changes to commit"
+
+      - name: Push changes
+        run: git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

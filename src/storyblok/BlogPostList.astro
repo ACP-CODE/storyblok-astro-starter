@@ -1,0 +1,36 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+import { getStories } from 'utils/storyblok';
+
+const { data } = await getStories({
+  content_type: 'blogPost',
+  language: Astro.currentLocale === 'zh-CN' ? 'default' : Astro.currentLocale,
+});
+
+const posts = data.stories.map((story) => {
+  return {
+    title: story.content.title,
+    date: new Date(story.published_at || story.created_at).toLocaleDateString(
+      Astro.currentLocale,
+      { dateStyle: 'full' }
+    ),
+    description: story.content.description,
+    slug: story.full_slug,
+  };
+});
+
+const { blok } = Astro.props;
+---
+
+<ul {...storyblokEditable(blok)}>
+  {
+    posts.map((post) => (
+      <li>
+        <time>{post.date}</time>
+        <a href={post.slug} set:html={post.title} />
+        <p>{post.description}</p>
+      </li>
+    ))
+  }
+</ul>

@@ -1,0 +1,36 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "components/*": [
+        "src/components/*"
+      ],
+      "interfaces/*": [
+        "src/interfaces/*"
+      ],
+      "layouts/*": [
+        "src/layouts/*"
+      ],
+      "utils/*": [
+        "src/utils/*"
+      ],
+      "@app/*": [
+        "src/app/*"
+      ],
+      "styles/*": [
+        "src/styles/*"
+      ],
+      "svgs/*": [
+        "src/assets/svgs/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    ".vercel"
+  ]
+}

@@ -1,0 +1,27 @@
+---
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+import BaseLayout from 'layouts/BaseLayout.astro';
+import { getStory, getLocalesStory } from 'utils/storyblok';
+
+export async function getStaticPaths() {
+  const allStories = await getLocalesStory('home');
+  return allStories.map((story) => {
+    return {
+      params: {
+        lang: story.lang === 'default' ? undefined : story.lang,
+        slug: story.slug,
+      },
+    };
+  });
+}
+
+const { lang } = Astro.params;
+const { data } = await getStory('home', { language: lang });
+
+const content = data.story.content;
+export const prerender = true;
+---
+
+<BaseLayout seo={{...content.seo[0]}}>
+  <StoryblokComponent blok={content} />
+</BaseLayout>
