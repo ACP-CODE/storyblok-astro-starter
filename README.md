@@ -1,7 +1,22 @@
 # Astro Starter Kit: Storyblok
 
+## 👨🏻‍🔬 创建 `astro` 项目
 ```sh
 npm create astro@latest -- --template ACP-CODE/storyblok-astro-starter
+```
+
+### 创建 `.env` 与 `.env.production` 文件
+
+- 使用 `cp` 命令（适用于 Unix 系统，如 macOS 和 Linux）
+
+```sh
+cp .env.example .env && cp .env.example .env.production
+```
+
+- 使用 `copy` 命令（适用于 Windows）
+
+```sh
+copy .env.example .env && copy .env.example .env.production
 ```
 
 ## 🚀 项目结构
