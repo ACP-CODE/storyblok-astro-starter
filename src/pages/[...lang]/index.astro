@@ -22,6 +22,6 @@ const content = data.story.content;
 export const prerender = true;
 ---
 
-<BaseLayout seo={{...content.seo[0]}}>
+<BaseLayout seo={{ ...content.seo[0] }}>
   <StoryblokComponent blok={content} />
 </BaseLayout>

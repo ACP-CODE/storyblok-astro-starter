@@ -18,7 +18,7 @@ export default defineConfig({
   //
   i18n: {
     defaultLocale: 'zh-CN',
-    locales: ['zh-CN', 'en']
+    locales: ['zh-CN', 'en-GB']
   },
   //
   vite: vite,
