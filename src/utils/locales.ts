@@ -1,4 +1,4 @@
-import astroConfig from '../../astro.config.mjs';
+import astroConfig from 'astro:config';
 import type { AstroUserConfig } from 'astro';
 
 function getLocales(config?: AstroUserConfig): string[] {

@@ -3,6 +3,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "astro:config": [
+        "astro.config.mjs"
+      ],
       "components/*": [
         "src/components/*"
       ],
