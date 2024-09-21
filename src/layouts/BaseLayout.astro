@@ -1,10 +1,9 @@
 ---
-import type { Props as BaseHeadProps } from 'components/BaseHead.astro';
-
-import BaseHead from 'components/BaseHead.astro';
+import type { Props as MetaProps } from 'components/Meta.astro';
+import Meta from 'components/Meta.astro';
 
 export interface Props {
-  seo?: BaseHeadProps;
+    seo?: MetaProps;
 }
 
 const { seo } = Astro.props;
@@ -12,10 +11,10 @@ const { seo } = Astro.props;
 
 <!doctype html>
 <html lang={Astro.currentLocale}>
-  <head>
-    <BaseHead {...seo} />
-  </head>
-  <body>
-    <slot />
-  </body>
+    <head>
+        <Meta {...seo} />
+    </head>
+    <body>
+        <slot />
+    </body>
 </html>

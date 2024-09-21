@@ -3,21 +3,36 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "astro-config": [
-        "astro.config.mjs"
-      ],
       "components/*": [
         "src/components/*"
       ],
       "layouts/*": [
         "src/layouts/*"
       ],
+      "modules": [
+        "src/modules/*"
+      ],
       "utils/*": [
         "src/utils/*"
       ],
+      "scripts/*": [
+        "src/scripts/*"
+      ],
       "styles/*": [
-        "src/scss/*"
+        "src/styles/*"
+      ],
+      "svgs/*": [
+        "src/svgs/*"
       ]
     }
-  }
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "dist",
+    ".vercel",
+    ".netlify",
+    "node_modules"
+  ]
 }

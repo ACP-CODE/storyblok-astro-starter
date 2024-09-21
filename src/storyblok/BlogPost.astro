@@ -7,9 +7,9 @@ const content = renderRichText(blok.content);
 ---
 
 <article {...storyblokEditable(blok)}>
-  <h1>{blok.title}</h1>
-  <p>{blok.description}</p>
-  <p>{blok.author?.name}</p>
-  <Fragment set:html={content} />
-  <div>静态内容...</div>
+    <h1>{blok.title}</h1>
+    <p>{blok.description}</p>
+    <p>{blok.author?.name}</p>
+    <Fragment set:html={content} />
+    <div>静态内容...</div>
 </article>

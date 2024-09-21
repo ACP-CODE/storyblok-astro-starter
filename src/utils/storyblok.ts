@@ -1,65 +1,60 @@
 import { useStoryblokApi } from '@storyblok/astro';
-import type { ISbStory, ISbStories, ISbStoriesParams } from '@storyblok/astro';
-const storyblokApi = useStoryblokApi();
+import type { ISbStory, ISbStories, ISbStoryParams, ISbStoriesParams, ISbCustomFetch, ISbResult } from 'storyblok-js-client';
 
-import { locales } from './locales';
 const version = import.meta.env.DEV ? 'draft' : 'published';
 
-export async function get(slug: string, params?: ISbStoriesParams): Promise<ISbStory> {
-  const data = await storyblokApi.get(slug, {
-    version,
-    ...params
-  });
-  return data;
+export async function get(slug: string, params?: ISbStoriesParams, fetchOptions?: ISbCustomFetch): Promise<ISbResult> {
+    const storyblokApi = useStoryblokApi();
+    try {
+        const data = await storyblokApi.get(slug, {
+            version: version,
+            ...params
+        }, fetchOptions);
+        return data;
+    } catch (error) {
+        console.error(`Error fetching data for slug: ${slug}`, error);
+        throw new Error('Failed to fetch data.');
+    }
 }
 
-export async function getStory(slug: string, params?: ISbStoriesParams): Promise<ISbStory> {
-  const data = await storyblokApi.getStory(slug, {
-    version,
-    ...params
-  });
-  return data;
+export async function getAll(slug: string, params?: ISbStoriesParams, entity?: string, fetchOptions?: ISbCustomFetch): Promise<any[]> {
+    const storyblokApi = useStoryblokApi();
+    try {
+        const data = await storyblokApi.getAll(slug, {
+            version: version,
+            ...params,
+        }, entity, fetchOptions);
+        return data;
+    } catch (error) {
+        console.error(`Error fetching all data for slug: ${slug}`, error);
+        throw new Error('Failed to fetch all data.');
+    }
 }
 
-export async function getLocalesStory(slug: string, params?: ISbStoriesParams, languages?: string[],): Promise<any[]> {
-  const allStories = [];
-  for (const lang of languages || locales) {
-    const { data }: ISbStory = await storyblokApi.getStory( slug, {
-      version,
-      fallback_lang: 'default',
-      language: lang,
-      ...params
-    });
-
-    allStories.push(data.story);
-  }
-  return allStories;
+export async function getStory(slug: string, params?: ISbStoryParams, fetchOptions?: ISbCustomFetch): Promise<ISbStory> {
+    const storyblokApi = useStoryblokApi();
+    try {
+        const data = await storyblokApi.getStory(slug, {
+            version: version,
+            ...params,
+        }, fetchOptions);
+        return data;
+    } catch (error) {
+        console.error(`Error fetching story for slug: ${slug}`, error);
+        throw new Error('Failed to fetch story.');
+    }
 }
 
-export async function getStories(params: ISbStoriesParams): Promise<ISbStories> {
-  const data = await storyblokApi.getStories({
-    version,
-    ...params
-  });
-  return data;
-}
-
-export async function getLocalesStories( params: ISbStoriesParams, languages?: string[]): Promise<any[]> {
-  const allStories = [];
-  for (const lang of languages || locales) {
-    const { data }: ISbStories = await storyblokApi.getStories({
-      version,
-      fallback_lang: 'default',
-      language: lang,
-      ...params
-    });
-
-    const stories = Object.values(data.stories).map(story => ({
-      ...story,
-      lang
-    }));
-
-    allStories.push(...stories);
-  }
-  return allStories;
+export async function getStories(params?: ISbStoriesParams, fetchOptions?: ISbCustomFetch): Promise<ISbStories> {
+    const storyblokApi = useStoryblokApi();
+    try {
+        const data = await storyblokApi.getStories({
+            version: version,
+            ...params
+        }, fetchOptions);
+        return data;
+    } catch (error) {
+        console.error('Error fetching stories', error);
+        throw new Error('Failed to fetch stories.');
+    }
 }

@@ -1,0 +1,25 @@
+---
+import BaseLayout from 'layouts/BaseLayout.astro';
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+import { getStories } from 'utils/storyblok';
+import { toMeta } from 'utils/meta';
+
+export async function getStaticPaths() {
+    const { data } = await getStories({
+        content_type: 'page',
+    });
+
+    return data.stories.map((story) => {
+        return {
+            params: { page: story.slug === 'home' ? undefined : story.slug },
+            props: { data: story },
+        };
+    });
+}
+
+const { data } = Astro.props;
+---
+
+<BaseLayout {...toMeta(data)} {...data.content}>
+    <StoryblokComponent blok={data.content} />
+</BaseLayout>

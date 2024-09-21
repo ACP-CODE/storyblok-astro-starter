@@ -1,0 +1,25 @@
+---
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+import { storyblokEditable } from '@storyblok/astro';
+
+const { blok } = Astro.props;
+---
+
+<main
+    class:list={[
+        'hello',
+        {
+            world: true,
+            'u-padding-top': true,
+            test: false
+        },
+        ['friend']
+    ]}
+    {...storyblokEditable(blok)}
+>
+    {
+        blok.body?.map((blok: any) => {
+            return <StoryblokComponent blok={blok} />;
+        })
+    }
+</main>

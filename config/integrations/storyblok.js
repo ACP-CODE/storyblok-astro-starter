@@ -4,10 +4,13 @@ import storyblokIntegration from '@storyblok/astro';
 export const storyblok = storyblokIntegration({
   accessToken: env.STORYBLOK_TOKEN,
   components: {
+    // content-type
+    page: 'layouts/ContentType/Page',
+    // default
     feature: 'storyblok/Feature',
     grid: 'storyblok/Grid',
-    page: 'storyblok/Page',
     teaser: 'storyblok/Teaser',
+    //
     blogPost: 'storyblok/BlogPost',
     blogPostList: 'storyblok/BlogPostList',
   },
