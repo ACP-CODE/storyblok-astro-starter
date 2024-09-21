@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "cloudflare",
+  "name": "@astro-starter/storyblok",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
